@@ -21,6 +21,11 @@
 
   </div>
   <div class="right four columns omega" data-hook="admin_page_form_right">
+    <%= f.field_container :image do %>
+      <%= f.label :image %> <span class="required">*</span><br />
+      <%= f.file_field :image, :class => 'fullwidth title' %>
+      <%= f.error_message_on :image %>
+    <% end %>
 
     <%= f.field_container :layout do %>
       <%= f.label :layout %><br />

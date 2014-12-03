@@ -13,9 +13,28 @@
       <%= f.error_message_on :slug %>
     <% end %>
 
+    <div id="toolbar" style="display: none;">
+      <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1">h1</a>
+      <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">h2</a>
+      <a data-wysihtml5-command="bold" title="CTRL+B">bold</a>
+      <a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+      <a data-wysihtml5-command="insertUnorderedList">list</a>
+      <a data-wysihtml5-command="insertHTML" data-wysihtml5-command-value="<blockquote>foobar</blockquote>">quote</a>
+      <a data-wysihtml5-command="createLink">insert link</a>
+      <a data-wysihtml5-action="change_view">HTML</a>
+      <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="pink">pink</a>
+      <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="grey">grey</a>
+      <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="white">white</a>
+
+      <div data-wysihtml5-dialog="createLink" style="display: none;">
+        <input data-wysihtml5-dialog-field="href" value="http://">
+        <a data-wysihtml5-dialog-action="save">OK</a><a data-wysihtml5-dialog-action="cancel">Cancel</a>
+      </div>
+    </div>
+
     <%= f.field_container :body do %>
       <%= f.label :body %> <span class="required">*</span><br />
-      <%= f.text_area :body, {rows: 12, :class => 'fullwidth'} %>
+      <%= f.text_area :body, {rows: 12, :class => 'fullwidth wysihtml5'} %>
       <%= f.error_message_on :body %>
     <% end %>
 
@@ -101,3 +120,15 @@
   <div data-hook="admin_page_form_additional_fields"></div>
   <div class="clear"></div>
 </div>
+
+<script>
+var editor = new wysihtml5.Editor("page_body", { // id of textarea element
+  toolbar:      "toolbar", // id of toolbar element
+  parserRules:  wysihtml5ParserRules, // defined in parser rules set 
+  stylesheets: ["<%= asset_path 'assets/spree/backend/wysihtml5.css' %>"],
+  style: false,
+  autoLink: true,
+  useLineBreaks: true,
+  cleanUp: true
+});
+</script>

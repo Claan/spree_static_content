@@ -18,7 +18,7 @@
   <% end %>
 
   <div id="wysiwyhhh_content">
-    <%= image_tag @page.image.url if @page.image? %>
+    <%= image_tag @page.image.url(:original) if @page.image? %>
     <%= raw @page.body %>
   </div>
 <% end %>
